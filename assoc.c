@@ -164,6 +164,7 @@ item* assoc_delete(const char *key, const size_t nkey, const uint32_t hv) {
     item **before;
 
     hmask = hv & hashmask(hashpower);
+    //Should decrement CLOCK reference?
 
     before = _hashitem_before(key, nkey, hmask);
 
