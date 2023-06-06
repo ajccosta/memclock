@@ -3894,7 +3894,8 @@ static void clock_handler(const evutil_socket_t fd, const short which, void *arg
 
     // While we're here, check for hash table expansion.
     // This function should be quick to avoid delaying the timer.
-    //assoc_start_expand(stats_state.curr_items);
+    assoc_start_expand(stats_state.curr_items);
+
     // also, if HUP'ed we need to do some maintenance.
     // for now that's just the authfile reload.
     if (settings.sig_hup) {
@@ -5957,10 +5958,7 @@ int main (int argc, char **argv) {
     }
 #endif
 
-    //Disable hash table maintener thread (did table expasion)
-    start_assoc_maint = false;
-    if (start_assoc_maint) {
-    //if (start_assoc_maint && start_assoc_maintenance_thread() == -1) {
+    if (start_assoc_maint && start_assoc_maintenance_thread() == -1) {
         exit(EXIT_FAILURE);
     }
     //Disable lru and hash table crawler
