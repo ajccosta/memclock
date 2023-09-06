@@ -6,6 +6,9 @@
 #define CLEAR_LRU(id) (id & ~(3<<6))
 #define GET_LRU(id) (id & (3<<6))
 
+
+#define FORCE_EVICTION //To test eviction overhead, force eviction every <settings.force_eviction_ratio> set requests
+					   
 /* See items.c */
 uint64_t get_cas_id(void);
 void set_cas_id(uint64_t new_cas);
